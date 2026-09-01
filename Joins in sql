@@ -1,0 +1,39 @@
+Scenario 1: Customer Deliveries
+Tables: users (user_id, user_name) and shipments (shipment_id, user_id, status)
+Task: Show the user_name and shipment_id for shipments where status = 'Delivered'.
+
+Scenario 2: Doctor Appointments
+Tables: doctors (doctor_id, doctor_name, specialty) and consultations (consultation_id, doctor_id, patient_name)
+Task: List the doctor_name and patient_name for consultations where the doctor's specialty = 'Cardiology'.
+
+Scenario 3: Product Inventory
+Tables: products (product_id, product_name, category) and inventory (item_id, product_id, stock_count)
+Task: Return product_name and stock_count for products in the 'Electronics' category.
+
+Scenario 4: Flight Bookings
+Tables: passengers (passenger_id, passenger_name) and tickets (ticket_id, passenger_id, class_type, price)
+Task: Show passenger_name and price for tickets where class_type = 'First Class' and price > 1000.
+
+
+
+
+1, select u.username, s.shipment_id
+from users as u inner join shipments as s
+on u.user_id = s.user_id
+where status = 'delivered';
+
+2, select d.doctor_name, c.patient_name
+from doctors as d inner join consultations as c
+on d.doctor_id = c.doctor_id
+where speciality = 'cardiology';
+
+3, select p.product_name, i.stock_count
+from products as p inner join inventory as i
+on p.product_id = i.product_id
+where category = 'electronics';
+
+4, select p.passengers_name, t.price
+from passengers as p inner join tickets as t
+on p.passenger_id = t.passenger_id
+where class_type = 'first class' and price > 1000;
+
