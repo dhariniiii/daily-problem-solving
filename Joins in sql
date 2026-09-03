@@ -34,6 +34,42 @@ from passengers as p inner join tickets as t
 on p.passenger_id = t.passenger_id
 where class_type = 'first class' and price > 1000;
 
+Question 1: Library Book CheckoutsContext: A public library wants to identify avid readers.  
+Table: book_checkouts (checkout_id, reader_id, book_title, checkout_date)
+Task: Write a query to find the reader_id and the total number of books checked out by each reader. Only include readers who have checked out at least 5 books (>= 5). 
+
+1, select reader_id, count(checkedout_id) as total_checkouts
+from book_checkouts
+group by reader_id
+having count(checkedout_id) >= 5;
+
+Question 2: Hospital Patient VisitsContext: A clinic needs to find patients who visit frequently for follow-up care.  
+Table: appointments (appt_id, patient_id, doctor_name, appt_date)Task: Write a query to show each patient_id and their total appointment count. 
+Only show patients who have visited more than 2 times (> 2). 
+
+2. select patient_id, count(appt_id) as total_appts
+from appointments
+group by patient_id
+having count(appt_id) > 2;
+
+Question 3: University Course EnrollmentsContext: The registrar wants to find highly popular courses.  
+Table: enrollments (enrollment_id, course_code, student_id)Task: Write a query to list each course_code along with the total number of enrolled students. 
+Filter to show only courses that have more than 20 students enrolled.  
+
+3,select course_code, count(enrollment_id) as tot_enroll
+from enrollments
+group by course_code
+having count(enrollment_id) > 20;
+
+Question 4: Hotel Guest BookingsContext: A resort wants to send a loyalty voucher to repeat guests.  
+Table: hotel_reservations (res_id, guest_id, room_number, check_in_date)Task: Write a query to find each guest_id and their total number of reservations. 
+Only include guests who have booked more than 3 times (> 3), and sort the output so the guest with the most reservations appears at the top. 
+
+4, select guest_id, count(res_id) as total_res
+from hotel_reservations
+group by guest_id
+having count(res_id) > 3;
+
 Scenario: Customer Loyalty Tiers
 Table A: users (user_id, username)
 Table B: payments (payment_id, user_id, amount, status)
@@ -55,4 +91,3 @@ WHERE o.status = 'Completed'
 GROUP BY c.customer_id, c.name
 HAVING SUM(o.amount) > 200
 ORDER BY total_spent DESC;
-
