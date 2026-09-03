@@ -1,0 +1,7 @@
+ROW_NUMBER() simply numbers rows sequentially based on a specific order you choose.
+
+FOR EXAMPLE :
+ROW_NUMBER() OVER (
+    PARTITION BY department 
+    ORDER BY salary DESC
+) AS rank_in_dept
