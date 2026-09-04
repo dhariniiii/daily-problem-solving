@@ -1,0 +1,30 @@
+A subquery (also called an inner query or nested query) is a SELECT statement embedded inside another SQL statement (such as SELECT, INSERT, UPDATE, or DELETE).  Where Subqueries Are Used1. 
+In the WHERE Clause (Filtering)Find employees who make more than the average salary:SQL
+
+SELECT first_name, salary
+FROM employees
+WHERE salary > (
+    SELECT AVG(salary) 
+    FROM employees
+);
+
+The inner query finds the overall average salary first, then feeds that single number into the outer query's WHERE filter.
+
+2. In the FROM Clause (Derived Tables)Querying a temporary table directly in-line:SQL
+
+SELECT department, avg_salary
+FROM (
+    SELECT department, AVG(salary) AS avg_salary
+    FROM employees
+    GROUP BY department
+) AS dept_summary
+WHERE avg_salary > 70000;
+(Always provide an alias like AS dept_summary for derived tables in the FROM clause).
+
+3. In the SELECT Clause (Scalar Subquery)Display each employee's salary alongside the company-wide average:SQL
+
+SELECT 
+    first_name, 
+    salary,
+    (SELECT AVG(salary) FROM employees) AS company_avg_salary
+FROM employees;
